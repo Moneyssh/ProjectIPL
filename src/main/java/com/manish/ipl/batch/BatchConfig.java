@@ -97,6 +97,14 @@ public class BatchConfig {
 				.dataSource(dataSource).build();
 	}
 	
+	@Bean("JdbcBatchItemWriter3")
+	public JdbcBatchItemWriter<Match> writer1(DataSource dataSource) {
+		return new JdbcBatchItemWriterBuilder<Match>()
+				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
+				.sql("INSERT INTO match_table (id, city, match_date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, match_result, result_margin, umpire1, umpire2) VALUES (:id, :city, :matchDate, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :matchResult, :resultMargin, :umpire1, :umpire2)")
+				.dataSource(dataSource).build();
+	}
+	
 //	@Bean("JdbcBatchItemWriter2")
 //	public JdbcBatchItemWriter<Match> writer2(DataSource dataSource) {
 //		return new JdbcBatchItemWriterBuilder<Match>()
